@@ -5,10 +5,10 @@ Original @ https://github.com/theonion/videojs-vast-plugin (commit bf6ce85fa7632
 .vast-skip-button {
   display: block;
   position: absolute;
-  top: 5px;
+  bottom: 3rem;
   right: 0;
   width: auto;
-  background-color: #000;
+  background-color: rgba(38, 38, 38, 0.9);
   color: #aaa;
   font-size: 12px;
   font-style: italic;
@@ -24,7 +24,7 @@ Original @ https://github.com/theonion/videojs-vast-plugin (commit bf6ce85fa7632
 
 .vast-skip-button.enabled:hover {
   cursor: pointer;
-  background: #333;
+  background: rgb(38, 38, 38);
 }
 
 .vast-blocker {

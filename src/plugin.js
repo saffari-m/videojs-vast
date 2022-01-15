@@ -305,12 +305,12 @@ class Vast extends Plugin {
     const timeLeft = Math.ceil(this.options.skip - player.currentTime());
 
     if (timeLeft > 0) {
-      this.domElements.skipButton.innerHTML = 'Skip in ' + timeLeft + '...';
+      this.domElements.skipButton.innerHTML = this.player.localize('SkipSeconds') + timeLeft;
     } else if (
       (' ' + this.domElements.skipButton.className + ' ').indexOf(' enabled ') === -1
     ) {
       this.domElements.skipButton.className += ' enabled ';
-      this.domElements.skipButton.innerHTML = 'Skip';
+      this.domElements.skipButton.innerHTML = this.player.localize('SkipAds');
     }
   }
 
