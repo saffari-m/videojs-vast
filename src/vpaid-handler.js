@@ -1,27 +1,29 @@
-import * as VPAIDHTML5Client from "vpaid-html5-client";
+import window from 'global/window';
+import document from 'global/document';
+import * as VPAIDHTML5Client from 'vpaid-html5-client';
 
 export default function handleVPAID(player, vastCreative, options) {
   const validTypes = [
-    "application/x-javascript",
-    "text/javascript",
-    "application/javascript",
+    'application/x-javascript',
+    'text/javascript',
+    'application/javascript'
   ];
   const validMime = (mediaFile) =>
     validTypes.indexOf(mediaFile.mimeType.trim()) > -1;
 
-  const vpaidMediaFile = vastCreative.mediaFiles.find(
-    (mediaFile) => mediaFile.apiFramework === "VPAID" && validMime(mediaFile)
-  );
+  const vpaidMediaFile = vastCreative.mediaFiles.find((mediaFile) => mediaFile.apiFramework === 'VPAID' && validMime(mediaFile));
 
   if (!vpaidMediaFile) {
-    console.warn("Only JavaScript VPAID is supported by this player");
-    this.player.trigger("adscanceled");
+    // eslint-disable-next-line no-console
+    console.warn('Only JavaScript VPAID is supported by this player');
+    this.player.trigger('adscanceled');
     return;
   }
 
-  const techScreen = player.el().querySelector(".vjs-tech");
+  const techScreen = player.el().querySelector('.vjs-tech');
 
-  const vpaidContainerElement = document.createElement("div");
+  const vpaidContainerElement = document.createElement('div');
+
   vpaidContainerElement.className = options.vpaid.containerClass;
   vpaidContainerElement.id = options.vpaid.containerId;
 
@@ -42,55 +44,57 @@ export default function handleVPAID(player, vastCreative, options) {
 
   function onLoad(err, adUnit) {
     if (err) {
+      // eslint-disable-next-line no-console
       console.error(err);
       player.controlBar.show();
-      player.trigger("aderror");
+      player.trigger('aderror');
       return;
     }
 
-    adUnit.handshakeVersion("2.0", onHandShake);
-    adUnit.subscribe("AdLoaded", onAdLoaded);
-    adUnit.subscribe("AdStarted", onAdStarted);
-    adUnit.subscribe("AdStopped", onAdStopped);
+    adUnit.handshakeVersion('2.0', onHandShake);
+    adUnit.subscribe('AdLoaded', onAdLoaded);
+    adUnit.subscribe('AdStarted', onAdStarted);
+    adUnit.subscribe('AdStopped', onAdStopped);
 
     // TODO: handle VAST tracking
 
     let videoElement;
 
+    // eslint-disable-next-line handle-callback-err
     function onHandShake(error, result) {
       const initialDimensions = getPlayerDimensions(player);
 
       const creativeData = {
-        AdParameters: vastCreative.adParameters,
+        AdParameters: vastCreative.adParameters
       };
 
       const videoInstance = options.vpaid.videoInstance;
-      if (videoInstance === "same") {
+
+      if (videoInstance === 'same') {
         videoElement = player.tech({ kindaKnowWhatImDoing: true }).el();
-      } else if (videoInstance === "new") {
-        videoElement = document.createElement("video");
+      } else if (videoInstance === 'new') {
+        videoElement = document.createElement('video');
         videoElement.style.cssText =
-          "position:absolute; top:0; left:0; z-index:2 !important;";
+          'position:absolute; top:0; left:0; z-index:2 !important;';
         vpaidContainerElement.appendChild(videoElement);
       } else {
-        if (videoInstance !== "none") {
-          console.warn(
-            videoInstance +
-              " is an invalid videoInstance value. Defaulting to 'none'."
-          );
+        if (videoInstance !== 'none') {
+          // eslint-disable-next-line no-console
+          console.warn(videoInstance +
+              " is an invalid videoInstance value. Defaulting to 'none'.");
         }
         videoElement = null;
       }
 
       const environmentVars = {
         slot: vpaidContainerElement,
-        videoSlot: videoElement,
+        videoSlot: videoElement
       };
 
       adUnit.initAd(
         initialDimensions.width,
         initialDimensions.height,
-        "normal",
+        'normal',
         -1,
         creativeData,
         environmentVars
@@ -102,20 +106,20 @@ export default function handleVPAID(player, vastCreative, options) {
     }
 
     function onAdStarted() {
-      player.trigger("ads-ad-started");
-      player.on("resize", resizeAd);
-      window.addEventListener("resize", resizeAd);
+      player.trigger('ads-ad-started');
+      player.on('resize', resizeAd);
+      window.addEventListener('resize', resizeAd);
     }
 
     function onAdStopped() {
       vpaidClient.destroy();
       player.controlBar.show();
-      player.off("resize", resizeAd);
-      window.removeEventListener("resize", resizeAd);
-      player.trigger("adended");
+      player.off('resize', resizeAd);
+      window.removeEventListener('resize', resizeAd);
+      player.trigger('adended');
       player.ads.endLinearAdMode();
 
-      if (options.vpaid.videoInstance === "new" && videoElement.parentElement) {
+      if (options.vpaid.videoInstance === 'new' && videoElement.parentElement) {
         videoElement.parentElement.removeChild(videoElement);
       }
     }
@@ -126,7 +130,7 @@ export default function handleVPAID(player, vastCreative, options) {
       adUnit.resizeAd(
         newDimensions.width,
         newDimensions.height,
-        player.isFullscreen() ? "fullscreen" : "normal"
+        player.isFullscreen() ? 'fullscreen' : 'normal'
       );
     }
   }
@@ -141,5 +145,5 @@ function getPlayerDimensions(player) {
     height = window.innerHeight;
   }
 
-  return { width: width, height: height };
+  return { width, height };
 }

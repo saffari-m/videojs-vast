@@ -19,7 +19,7 @@
     "docs": "npm-run-all docs:*",
     "docs:api": "jsdoc src -r -d docs/api",
     "docs:toc": "doctoc --notitle README.md",
-    "lint": "vjsstandard",
+    "lint": "vjsstandard --fix",
     "server": "karma start scripts/karma.conf.js --singleRun=false --auto-watch",
     "start": "npm-run-all -p server watch",
     "test": "npm-run-all lint build-test && karma start scripts/karma.conf.js",
