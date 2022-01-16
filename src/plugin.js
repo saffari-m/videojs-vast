@@ -230,11 +230,11 @@ class Vast extends Plugin {
     player.controls(options.controlsEnabled);
 
     this.originalPlayerState.seekEnabled =
-      player.controlBar.progressControl.enabled();
+      player.controlBar.customProgressControl.enabled();
     if (options.seekEnabled) {
-      player.controlBar.progressControl.enable();
+      player.controlBar.customProgressControl.enable();
     } else {
-      player.controlBar.progressControl.disable();
+      player.controlBar.customProgressControl.disable();
     }
 
     player.src(createSourceObjects(vastCreative.mediaFiles));
@@ -331,9 +331,9 @@ class Vast extends Plugin {
     player.controls(this.originalPlayerState.controlsEnabled);
 
     if (this.originalPlayerState.seekEnabled) {
-      player.controlBar.progressControl.enable();
+      player.controlBar.customProgressControl.enable();
     } else {
-      player.controlBar.progressControl.disable();
+      player.controlBar.customProgressControl.disable();
     }
 
     player.trigger('vast-done');
