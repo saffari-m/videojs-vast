@@ -1,6 +1,6 @@
 {
   "name": "@filmgardi/videojs-vast",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A Video.js plugin to allow the player to sarve adverts using VAST",
   "main": "dist/videojs-vast.cjs.js",
   "module": "dist/videojs-vast.es.js",
@@ -65,7 +65,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run test"
+      "pre-push": ""
     }
   },
   "lint-staged": {

@@ -10,10 +10,10 @@ Original @ https://github.com/theonion/videojs-vast-plugin (commit bf6ce85fa7632
   width: auto;
   background-color: rgba(38, 38, 38, 0.9);
   color: #aaa;
-  font-size: 12px;
+  font-size: 1rem;
   font-style: italic;
-  line-height: 12px;
-  padding: 10px;
+  line-height: 1rem;
+  padding: 1rem;
   z-index: 2;
 }
 

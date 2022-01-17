@@ -230,11 +230,11 @@ class Vast extends Plugin {
     player.controls(options.controlsEnabled);
 
     this.originalPlayerState.seekEnabled =
-      player.controlBar.progressControl.enabled();
+      player.controlBar.customProgressControl.enabled();
     if (options.seekEnabled) {
-      player.controlBar.progressControl.enable();
+      player.controlBar.customProgressControl.enable();
     } else {
-      player.controlBar.progressControl.disable();
+      player.controlBar.customProgressControl.disable();
     }
 
     player.src(createSourceObjects(vastCreative.mediaFiles));
@@ -305,7 +305,7 @@ class Vast extends Plugin {
     const timeLeft = Math.ceil(this.options.skip - player.currentTime());
 
     if (timeLeft > 0) {
-      this.domElements.skipButton.innerHTML = this.player.localize('SkipSeconds') + timeLeft;
+      this.domElements.skipButton.innerHTML = timeLeft + ' ' +this.player.localize('SkipSeconds');
     } else if (
       (' ' + this.domElements.skipButton.className + ' ').indexOf(' enabled ') === -1
     ) {
@@ -331,9 +331,9 @@ class Vast extends Plugin {
     player.controls(this.originalPlayerState.controlsEnabled);
 
     if (this.originalPlayerState.seekEnabled) {
-      player.controlBar.progressControl.enable();
+      player.controlBar.customProgressControl.enable();
     } else {
-      player.controlBar.progressControl.disable();
+      player.controlBar.customProgressControl.disable();
     }
 
     player.trigger('vast-done');
