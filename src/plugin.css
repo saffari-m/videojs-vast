@@ -17,6 +17,21 @@ Original @ https://github.com/theonion/videojs-vast-plugin (commit bf6ce85fa7632
   z-index: 2;
 }
 
+.vast-click-button {
+  display: block;
+  position: absolute;
+  bottom: 3rem;
+  left: 0;
+  width: auto;
+  background-color: rgba(38, 38, 38, 0.9);
+  color: #aaa;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1rem;
+  padding: 1rem;
+  z-index: 2;
+}
+
 .vast-skip-button.enabled {
   cursor: pointer;
   color: #fff;

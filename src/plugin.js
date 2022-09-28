@@ -264,10 +264,19 @@ class Vast extends Plugin {
     this.domElements.skipButton = skipButton;
     player.el().appendChild(skipButton);
 
+    const clickButton = window.document.createElement('div');
+
+    clickButton.className = 'vast-click-button';
+    clickButton.style.display = 'none';
+    clickButton.innerText = 'بیشتر بدانید';
+    this.domElements.clickButton = clickButton;
+    player.el().appendChild(clickButton);
+
     this.eventListeners.adtimeupdate = () => this._timeUpdate();
     player.one('adplay', () => {
       if (this.options.skip > 0 && player.duration() >= this.options.skip) {
         skipButton.style.display = 'block';
+        clickButton.style.display = 'block';
         player.on('adtimeupdate', this.eventListeners.adtimeupdate);
       }
       this.player.loadingSpinner.el().style.display = 'none';
@@ -305,7 +314,7 @@ class Vast extends Plugin {
     const timeLeft = Math.ceil(this.options.skip - player.currentTime());
 
     if (timeLeft > 0) {
-      this.domElements.skipButton.innerHTML = timeLeft + ' ' +this.player.localize('SkipSeconds');
+      this.domElements.skipButton.innerHTML = timeLeft + ' ' + this.player.localize('SkipSeconds');
     } else if (
       (' ' + this.domElements.skipButton.className + ' ').indexOf(' enabled ') === -1
     ) {
