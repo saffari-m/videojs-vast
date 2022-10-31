@@ -1,8 +1,8 @@
+import { VASTClient, VASTParser, VASTTracker } from '@dailymotion/vast-client';
 import window from 'global/window';
 import videojs from 'video.js';
-import { version as VERSION } from '../package.json';
 import 'videojs-contrib-ads';
-import { VASTClient, VASTParser, VASTTracker } from '@dailymotion/vast-client';
+import { version as VERSION } from '../package.json';
 // import handleVPAID from "./vpaid-handler";
 
 const Plugin = videojs.getPlugin('plugin');
@@ -268,7 +268,7 @@ class Vast extends Plugin {
 
     clickButton.className = 'vast-click-button';
     clickButton.style.display = 'none';
-    clickButton.innerText = 'بیشتر بدانید';
+    clickButton.innerText = 'اطلاعات بیشتر';
     this.domElements.clickButton = clickButton;
     player.el().appendChild(clickButton);
 
@@ -314,7 +314,8 @@ class Vast extends Plugin {
     const timeLeft = Math.ceil(this.options.skip - player.currentTime());
 
     if (timeLeft > 0) {
-      this.domElements.skipButton.innerHTML = timeLeft + ' ' + this.player.localize('SkipSeconds');
+      this.domElements.skipButton.innerHTML =
+        timeLeft + ' ' + this.player.localize('SkipSeconds');
     } else if (
       (' ' + this.domElements.skipButton.className + ' ').indexOf(' enabled ') === -1
     ) {
