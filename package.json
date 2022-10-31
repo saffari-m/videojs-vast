@@ -1,6 +1,6 @@
 {
   "name": "@filmgardi/videojs-vast",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A Video.js plugin to allow the player to serve adverts using VAST",
   "main": "dist/videojs-vast.cjs.js",
   "module": "dist/videojs-vast.es.js",
