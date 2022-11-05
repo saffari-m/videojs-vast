@@ -1,28 +1,31 @@
 {
   "name": "@filmgardi/videojs-vast",
-  "version": "1.0.13",
-  "description": "A Video.js plugin to allow the player to serve adverts using VAST",
+  "version": "1.0.14",
+  "description": "A Video.js plugin to allow the player to sarve adverts using VAST",
   "main": "dist/videojs-vast.cjs.js",
   "module": "dist/videojs-vast.es.js",
   "browser": "dist/videojs-vast.js",
   "generator-videojs-plugin": {
-    "version": "8.0.0"
+    "version": "7.6.3"
   },
   "scripts": {
+    "prebuild": "npm run clean",
     "build": "npm-run-all -s clean -p build:*",
     "build-prod": "cross-env-shell NO_TEST_BUNDLE=1 'npm run build'",
     "build-test": "cross-env-shell TEST_BUNDLE_ONLY=1 'npm run build'",
     "build:css": "postcss -o dist/videojs-vast.css --config scripts/postcss.config.js src/plugin.css",
     "build:js": "rollup -c scripts/rollup.config.js",
     "build:lang": "vjslang --dir dist/lang",
-    "clean": "shx rm -rf ./dist ./test/dist ./cjs ./es && shx mkdir -p ./dist ./test/dist ./cjs ./es",
+    "clean": "shx rm -rf ./dist ./test/dist ./cjs ./es && shx mkdir -p ./dist ./test/dist",
     "docs": "npm-run-all docs:*",
     "docs:api": "jsdoc src -r -d docs/api",
     "docs:toc": "doctoc --notitle README.md",
     "lint": "vjsstandard --fix",
     "server": "karma start scripts/karma.conf.js --singleRun=false --auto-watch",
     "start": "npm-run-all -p server watch",
-    "test": "npm-run-all lint build-test && karma start scripts/karma.conf.js",
+    "test": "npm-run-all test:*",
+    "test:unit": "karma start scripts/karma.conf.js",
+    "test:verify": "vjsverify --verbose",
     "posttest": "shx cat test/dist/coverage/text.txt",
     "update-changelog": "conventional-changelog -p videojs -i CHANGELOG.md -s",
     "preversion": "",
@@ -30,11 +33,11 @@
     "watch": "npm-run-all -p watch:*",
     "watch:css": "npm run build:css -- -w",
     "watch:js": "npm run build:js -- -w",
-    "prepublishOnly": "npm-run-all build-prod && vjsverify --verbose"
+    "prepublishOnly": "npm-run-all build test:verify"
   },
   "engines": {
-    "node": ">=14",
-    "npm": ">=6"
+    "node": ">=8",
+    "npm": ">=5"
   },
   "keywords": [
     "videojs",
@@ -44,8 +47,6 @@
   "license": "MIT",
   "vjsstandard": {
     "ignore": [
-      "es",
-      "cjs",
       "dist",
       "docs",
       "test/dist"
@@ -53,10 +54,8 @@
   },
   "files": [
     "CONTRIBUTING.md",
-    "cjs/",
     "dist/",
     "docs/",
-    "es/",
     "index.html",
     "scripts/",
     "src/",
@@ -65,7 +64,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": ""
+      "pre-push": "npm run test"
     }
   },
   "lint-staged": {
@@ -82,18 +81,19 @@
   },
   "devDependencies": {
     "@babel/runtime": "^7.14.0",
-    "@videojs/generator-helpers": "~2.0.2",
     "jsdoc": "~3.6.6",
-    "karma": "^6.3.2",
     "postcss": "^8.2.13",
     "postcss-cli": "^8.3.1",
-    "rollup": "^2.46.0",
-    "sinon": "^9.1.0",
-    "videojs-generate-karma-config": "~8.0.0",
     "videojs-generate-postcss-config": "~3.0.0",
-    "videojs-generate-rollup-config": "~6.2.0",
-    "videojs-generator-verify": "~3.0.3",
     "videojs-languages": "^2.0.0",
-    "videojs-standard": "^8.0.4"
+    "@videojs/generator-helpers": "~1.0.0",
+    "karma": "^4.0.0",
+    "prettier": "^1.19.1",
+    "rollup": "^1.10.0",
+    "sinon": "^7.2.2",
+    "videojs-generate-karma-config": "~5.2.0",
+    "videojs-generate-rollup-config": "~3.1.0",
+    "videojs-generator-verify": "~1.2.0",
+    "videojs-standard": "^8.0.3"
   }
 }
