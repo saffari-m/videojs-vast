@@ -261,14 +261,17 @@ class Vast extends Plugin {
 
     skipButton.className = 'vast-skip-button';
     skipButton.style.display = 'none';
-    this.domElements.skipButton = skipButton;
+    this.domElements.skipButton = skipButton;    
     player.el().appendChild(skipButton);
 
     const clickButton = window.document.createElement('div');
 
     clickButton.className = 'vast-click-button';
     clickButton.style.display = 'none';
-    clickButton.innerText = 'اطلاعات بیشتر';
+    clickButton.innerText = this.player.localize('MoreInfo');
+    clickButton.onclick = () => {
+      this.tracker.click();
+    }
     this.domElements.clickButton = clickButton;
     player.el().appendChild(clickButton);
 

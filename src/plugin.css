@@ -30,6 +30,7 @@ Original @ https://github.com/theonion/videojs-vast-plugin (commit bf6ce85fa7632
   line-height: 1rem;
   padding: 1rem;
   z-index: 2;
+  cursor: pointer;
 }
 
 .vast-skip-button.enabled {
@@ -45,6 +46,7 @@ Original @ https://github.com/theonion/videojs-vast-plugin (commit bf6ce85fa7632
 .vast-blocker {
   display: block;
   position: absolute;
+  cursor: pointer;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -53,4 +55,8 @@ Original @ https://github.com/theonion/videojs-vast-plugin (commit bf6ce85fa7632
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.vjs-vast video{
+  z-index: 1;
 }
