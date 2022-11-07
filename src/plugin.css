@@ -46,6 +46,7 @@ Original @ https://github.com/theonion/videojs-vast-plugin (commit bf6ce85fa7632
 .vast-blocker {
   display: block;
   position: absolute;
+  z-index: 1;
   cursor: pointer;
   margin: 0;
   padding: 0;
