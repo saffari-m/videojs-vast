@@ -261,7 +261,7 @@ class Vast extends Plugin {
 
     skipButton.className = 'vast-skip-button';
     skipButton.style.display = 'none';
-    this.domElements.skipButton = skipButton;    
+    this.domElements.skipButton = skipButton;
     player.el().appendChild(skipButton);
 
     const clickButton = window.document.createElement('div');
@@ -269,9 +269,9 @@ class Vast extends Plugin {
     clickButton.className = 'vast-click-button';
     clickButton.style.display = 'none';
     clickButton.innerText = this.player.localize('MoreInfo');
-    clickButton.onclick = () => {
-      this.tracker.click();
-    }
+    // clickButton.onclick = () => {
+    //   this.tracker.click();
+    // }
     this.domElements.clickButton = clickButton;
     player.el().appendChild(clickButton);
 
@@ -279,7 +279,7 @@ class Vast extends Plugin {
     player.one('adplay', () => {
       if (this.options.skip > 0 && player.duration() >= this.options.skip) {
         skipButton.style.display = 'block';
-        clickButton.style.display = 'block';
+        // clickButton.style.display = 'block';
         player.on('adtimeupdate', this.eventListeners.adtimeupdate);
       }
       this.player.loadingSpinner.el().style.display = 'none';
