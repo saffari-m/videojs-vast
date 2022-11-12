@@ -78,7 +78,7 @@ class Vast extends Plugin {
 
     // Could be initialized already by user
     if (typeof player.ads === 'function') {
-      player.ads({ debug: false });
+      player.ads(Object.assign({ debug: false }, options.ads || {}));
     }
 
     this.vastClient = new VASTClient();
@@ -279,7 +279,7 @@ class Vast extends Plugin {
     player.one('adplay', () => {
       if (this.options.skip > 0 && player.duration() >= this.options.skip) {
         skipButton.style.display = 'block';
-        // clickButton.style.display = 'block';
+        clickButton.style.display = 'block';
         player.on('adtimeupdate', this.eventListeners.adtimeupdate);
       }
       this.player.loadingSpinner.el().style.display = 'none';
