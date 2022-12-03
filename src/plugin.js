@@ -278,6 +278,7 @@ class Vast extends Plugin {
     this.eventListeners.adtimeupdate = () => this._timeUpdate();
     player.one('adplay', () => {
       const skipDelay = this.vastCreative.skipDelay || this.options.skip || 5;
+
       if (skipDelay > 0 && player.duration() >= skipDelay) {
         skipButton.style.display = 'block';
         clickButton.style.display = 'block';
@@ -313,6 +314,7 @@ class Vast extends Plugin {
   _timeUpdate() {
     const player = this.player;
     const skipDelay = this.vastCreative.skipDelay || this.options.skip || 5;
+
     player.loadingSpinner.el().style.display = 'none';
 
     const timeLeft = Math.ceil(skipDelay - player.currentTime());
